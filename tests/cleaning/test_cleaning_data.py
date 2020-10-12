@@ -78,37 +78,42 @@ class TestGenerateList(object):
         test_list = ['abc','ef(','hij']
         test_arg = '('
         expected = [0, 1, 0]
-        actual = generate_list(test_function, test_list, *test_arg)
+        actual = generate_list(test_function, test_list, test_arg)
         assert actual == expected, f"Expected: {expected}, Actual {actual}"
 
     def test_classify_domain(self):
         test_function = classify_domain
-        test_list = ["aegon.v.targaryen@goldmansacs.com", "mblmambus@pm.me"]
+        test_list = ["aegon.v.targaryen@goldmansacs.com", "aegor.rivers@gmail.com"]
+        test_domain = "professional"
         expected = [1, 0]
-        actual = generate_list(test_function, test_list)
+        actual = generate_list(test_function, test_list, test_domain)
         assert actual == expected, f"Expected: {expected}, Actual: {actual}"
 
 class TestClassifyDomain(object):
     def test_professional(self):
         test_email = "aegon.v.targaryen@goldmansacs.com"
+        test_domain = "professional"
         expected = 1
-        actual = classify_domain(test_email)
+        actual = classify_domain(test_email, test_domain)
         assert actual == expected, f"Expected: {expected}, Actual {actual}"
 
-    def test_personal(self):
+    def test_not_professional(self):
         test_email = "aegor.rivers@gmail.com"
-        expected = 2
-        actual = classify_domain(test_email)
+        test_domain = "professional"
+        expected = 0
+        actual = classify_domain(test_email, test_domain)
         assert actual == expected, f"Expected: {expected}, Actual {actual}"
 
     def test_junk(self):
         test_email = "anders.yronwood@hotmail.com"
-        expected = 3
-        actual = classify_domain(test_email)
+        test_domain = "junk"
+        expected = 1
+        actual = classify_domain(test_email, test_domain)
         assert actual == expected, f"Expected: {expected}, Actual {actual}"
 
-    def test_other(self):
-        test_email = "mblmambus@pm.me"
-        expected = 0
-        actual = classify_domain(test_email)
+    def test_personal(self):
+        test_email = "aegor.rivers@gmail.com"
+        test_domain = "personal"
+        expected = 1
+        actual = classify_domain(test_email, test_domain)
         assert actual == expected, f"Expected: {expected}, Actual {actual}"
