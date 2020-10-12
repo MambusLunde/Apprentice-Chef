@@ -17,21 +17,22 @@ def has_character(string, character):
     else: return 0
 
 
-def remove_parentheses(string):
-    """Removes parentheses and what is contained by them.
+def remove_pattern(string, pattern):
+    """Removes the given pattern from the given string.
 
-    Using regex to find parentheses and returning a string without parentheses, and no trailing whitespace.
+    Using regex to find a pattern and returning a string without the pattern.
 
-    :param string: string to remove parentheses from
+    :param string: string to remove pattern from
+    :paran pattern: a regex expression to match
+    
+    :return: string without pattern
 
-    :return: string without parentheses
-
-    >>> remove_parentheses("Aegon Targaryen (son of Rhaegar)")
+    >>> remove_pattern("Aegon Targaryen (son of Rhaegar)", r".*?(\s\(.*?\))")
     "Aegon Targaryen"
     """
 
     # A pattern to find a whitespace followed by something inside parentheses
-    regex = re.compile(r".*?(\s\(.*?\))")
+    regex = re.compile(pattern)
     
     # This needs a try except block because if no matches are found slicing doesnt work
     try:

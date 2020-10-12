@@ -1,6 +1,6 @@
 import pytest
 
-from cleaning.cleaning_data import has_character, remove_parentheses, count_words, generate_list, classify_domain
+from cleaning.cleaning_data import has_character, remove_pattern, count_words, generate_list, classify_domain
 
 class TestHasCharacter(object):
     def test_with_character(self):
@@ -18,17 +18,19 @@ class TestHasCharacter(object):
         actual = has_character(test_string, test_character)
         assert actual == expected, f"Expected: {expected}, Actual {actual}"
 
-class TestRemoveParentheses(object):
+class TestRemovePattern(object):
     def test_with_parentheses(self):
         test_string = "Aegon Targaryen (son of Rhaegar)"
+        test_pattern = r".*?(\s\(.*?\))"
         expected = "Aegon Targaryen"
-        actual = remove_parentheses(test_string)
+        actual = remove_pattern(test_string, test_pattern)
         assert actual == expected, f"Expected: {expected}, Actual {actual}"
 
     def test_without_parentheses(self):
         test_string = "Aegon Targaryen"
+        test_pattern = r".*?(\s\(.*?\))"
         expected = "Aegon Targaryen"
-        actual = remove_parentheses(test_string)
+        actual = remove_pattern(test_string, test_pattern)
         assert actual == expected, f"Expected: {expected}, Actual {actual}"
 
 class TestCountWords(object):
