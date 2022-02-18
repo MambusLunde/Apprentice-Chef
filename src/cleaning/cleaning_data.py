@@ -1,6 +1,7 @@
 import re
+from typing import Callable
 
-def has_character(string, character):
+def has_character(string: str, character: str) -> int:
     """ A check to see if the 'character' is in the 'string'.
     
     :param string: The string to check.
@@ -17,7 +18,7 @@ def has_character(string, character):
     else: return 0
 
 
-def remove_pattern(string, pattern):
+def remove_pattern(string:str, pattern: str) -> str:
     """Removes the given pattern from the given string.
 
     Using regex to find a pattern and returning a string without the pattern.
@@ -44,7 +45,7 @@ def remove_pattern(string, pattern):
     string = string.replace(result, '')
     return string
 
-def count_words(string):
+def count_words(string: str) -> int:
     """Counts how many words are in a string.
 
     :param string: String to count words in.
@@ -66,7 +67,7 @@ def count_words(string):
 
     return count
 
-def generate_list(function, series, *args, **kwargs):
+def generate_list(function: Callable, series: list, *args, **kwargs)-> list:
     """ Generates a list based on an input function.
 
     Uses a list comprehension to generate a list.
@@ -85,7 +86,7 @@ def generate_list(function, series, *args, **kwargs):
     # Generates a list with the outputs of `function` given the `string` in the `series`
     return [function(string, *args, **kwargs) for string in series]
 
-def classify_domain(email, domain_type):
+def classify_domain(email: str, domain_type: str) -> int:
     """ Classifies whether an email is a given domain type.
 
     Given a list of which domains represent professional, personal, and junk domains, classify the email given as input
